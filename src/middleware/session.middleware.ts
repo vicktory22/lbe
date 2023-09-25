@@ -3,6 +3,11 @@ import { Context, HonoRequest, Next } from "hono";
 import { fromPromise } from "../utils/try-catch";
 
 export async function sessionMiddleware(c: Context, next: Next) {
+  if (["/login", "/signup"].includes(c.req.path)) {
+    await next();
+    return;
+  }
+
   const sessionToken = getTokenFromCookies(c.req);
 
   if (!sessionToken) {
