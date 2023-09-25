@@ -10,7 +10,7 @@ env:
 jobs:
   build:
 
-    name: Build
+    name: Deploy
     timeout-minutes: 3
     runs-on: ubuntu-latest
 
@@ -34,6 +34,9 @@ jobs:
         with:
           node-version: 18
           cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Deploy
         run: npx wrangler deploy --minify src/index.ts --compatibility-date 2023-05-09 --env staging
