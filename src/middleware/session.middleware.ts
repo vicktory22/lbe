@@ -1,5 +1,6 @@
 import { Clerk, verifyToken } from "@clerk/backend";
 import { Context, HonoRequest, Next } from "hono";
+import { getCookie } from "hono/cookie";
 import { fromPromise } from "../utils/try-catch";
 
 export async function sessionMiddleware(c: Context, next: Next) {
@@ -8,7 +9,7 @@ export async function sessionMiddleware(c: Context, next: Next) {
     return;
   }
 
-  const sessionToken = getTokenFromCookies(c.req);
+  const sessionToken = getCookie(c, "__session");
 
   if (!sessionToken) {
     return c.json({ message: "Unauthorized" }, 401);
@@ -42,13 +43,4 @@ export async function sessionMiddleware(c: Context, next: Next) {
   c.set("clerk", clerk);
 
   await next();
-}
-
-function getTokenFromCookies(req: HonoRequest): string | undefined {
-  const cookies = req.header("Cookie");
-
-  return cookies
-    ?.split(";")
-    .find((cookie) => cookie.trim().startsWith("__session"))
-    ?.split("=")[1];
 }
