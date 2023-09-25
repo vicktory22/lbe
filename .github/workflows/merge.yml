@@ -1,0 +1,39 @@
+name: MERGE
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  APP_NAME: lbe
+
+jobs:
+  build:
+
+    name: Build
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.3.1
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Deploy
+        run: npx wrangler deploy --minify src/index.ts --compatibility-date 2023-05-09 --env staging
