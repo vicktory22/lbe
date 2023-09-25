@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "format": "prettier --write src/**/*.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "@clerk/backend": "^0.29.0",
+    "@libsql/client": "^0.3.4",
+    "@sniptt/monads": "^0.5.10",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
+    "drizzle-orm": "^0.28.6",
+    "hono": "^3.6.0",
+    "zod": "^3.22.2",
+    "zod-validation-error": "^1.5.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230821.0",
+    "drizzle-kit": "^0.19.13",
+    "prettier": "^3.0.3",
+    "wrangler": "^3.7.0"
+  }
+}
