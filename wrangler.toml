@@ -1,2 +1,6 @@
 name = "lbe"
-compatibility_date = "2023-01-01"
+compatibility_date = "2023-05-09"
+
+[vars]
+PUBLIC_CLERK_URL=glowing-crow-12.clerk.accounts.dev
+
