@@ -36,4 +36,4 @@ jobs:
         run: pnpm install
 
       - name: Deploy
-        run: npx wrangler deploy --minify src/index.ts --compatibility-date 2023-05-09 --env staging
+        run: npx wrangler deploy src/index.ts --compatibility-date 2023-05-09 --env staging

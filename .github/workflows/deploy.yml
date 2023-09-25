@@ -32,4 +32,4 @@ jobs:
         run: pnpm install
 
       - name: Deploy
-        run: npx wrangler deploy --minify src/index.ts --env production
+        run: npx wrangler deploy src/index.ts --env production
